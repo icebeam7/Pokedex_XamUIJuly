@@ -1,0 +1,224 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Pokedex_XamUIJuly.Views._02_EmptyView"
+             Title="Empty View example">
+
+    <ContentPage.Resources>
+        <Style x:Key="BasicLabel" TargetType="Label">
+            <Setter Property="FontSize" Value="Micro"/>
+            <Setter Property="TextColor" Value="Black"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+        </Style>
+
+        <Style x:Key="StatLabel" BasedOn="{StaticResource BasicLabel}" TargetType="Label">
+            <Setter Property="HorizontalOptions" Value="Start"/>
+        </Style>
+
+        <Style x:Key="StatValueLabel" BasedOn="{StaticResource BasicLabel}" TargetType="Label">
+            <Setter Property="HorizontalOptions" Value="End"/>
+            <Setter Property="Margin" Value="0,0,2,0"/>
+        </Style>
+
+        <Style x:Key="StatValueBox" TargetType="BoxView">
+            <Setter Property="Margin" Value="1"/>
+            <Setter Property="HeightRequest" Value="10"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="HorizontalOptions" Value="Start"/>
+        </Style>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <StackLayout Margin="20">
+            <Button Text="Load List" Clicked="Button_Clicked"/>
+
+            <ActivityIndicator Color="Blue"
+                IsVisible="{Binding IsLoading}"
+                IsRunning="{Binding IsLoading}"
+                IsEnabled="{Binding IsLoading}"/>
+
+            <CollectionView 
+                ItemsSource="{Binding PokemonList}" 
+                x:Name="collectionView">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="2"/>
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.EmptyView>
+                    <StackLayout>
+                        <Label Text="The list is empty."
+                               FontAttributes="Bold"
+                               Margin="5"
+                               FontSize="18"
+                               HorizontalOptions="Fill"
+                               HorizontalTextAlignment="Center"/>
+
+                        <Label Text="Tap on the button first"
+                               FontSize="12"
+                               FontAttributes="Italic"
+                               HorizontalTextAlignment="Center"
+                               HorizontalOptions="Fill"/>
+                    </StackLayout>
+                </CollectionView.EmptyView>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid VerticalOptions="Center" Padding="10,10,0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="130"/>
+                            </Grid.RowDefinitions>
+                            <Frame HasShadow="True" Padding="5">
+                                <Grid BackgroundColor="#F9FFBC">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="60"/>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="20"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Image Grid.Row="0"
+                               Grid.Column="0"
+                               Grid.RowSpan="4"
+                               Source="{Binding ImageURL}"
+                               WidthRequest="60"
+                               HeightRequest="60"
+                               HorizontalOptions="Center"
+                               Aspect="AspectFit" />
+
+                                    <Label Grid.Row="4" 
+                               Grid.Column="0"
+                               Text="{Binding name.english}"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center"
+                               FontSize="Micro"
+                               TextColor="Blue"/>
+
+                                    <Label Grid.Row="5"
+                               Grid.Column="0"
+                               Text="{Binding Types}"
+                               FontAttributes="Italic"
+                               HorizontalOptions="Center"
+                               TextColor="#606060"
+                               FontSize="Micro"
+                               VerticalOptions="Start"/>
+
+                                    <Label Grid.Row="0"
+                               Grid.Column="1"
+                               Text="HP"
+                               Style="{StaticResource StatLabel}"/>
+
+                                    <BoxView Grid.Row="0"
+                                 Grid.Column="2"
+                                 Color="#A5FF82"
+                                 WidthRequest="{Binding HP}"
+                                 Style="{StaticResource StatValueBox}"/>
+
+                                    <Label Grid.Row="0"
+                               Grid.Column="3"
+                               Text="{Binding _base.HP}"
+                               Style="{StaticResource StatValueLabel}"/>
+
+                                    <Label Grid.Row="1"
+                               Grid.Column="1"
+                               Text="Attack"
+                               Style="{StaticResource StatLabel}"/>
+
+                                    <BoxView Grid.Row="1"
+                                 Grid.Column="2"
+                                 Color="#A32F2F"
+                                 WidthRequest="{Binding Attack}"
+                                 Style="{StaticResource StatValueBox}"/>
+
+                                    <Label Grid.Row="1"
+                               Grid.Column="3"
+                               Text="{Binding _base.Attack}"
+                               Style="{StaticResource StatValueLabel}"/>
+
+                                    <Label Grid.Row="2"
+                               Grid.Column="1"
+                               Text="Defense"
+                               Style="{StaticResource StatLabel}"/>
+
+                                    <BoxView Grid.Row="2"
+                                 Grid.Column="2"
+                                 Color="#47B7C1"
+                                 WidthRequest="{Binding Defense}"
+                                 Style="{StaticResource StatValueBox}"/>
+
+                                    <Label Grid.Row="2"
+                               Grid.Column="3"
+                               Text="{Binding _base.Defense}"
+                               Style="{StaticResource StatValueLabel}"/>
+
+                                    <Label Grid.Row="3"
+                               Grid.Column="1"
+                               Text="Sp. Attack"
+                               Style="{StaticResource StatLabel}"/>
+
+                                    <BoxView Grid.Row="3"
+                                 Grid.Column="2"
+                                 Color="#EACA15"
+                                 WidthRequest="{Binding SpAttack}"
+                                 Style="{StaticResource StatValueBox}"/>
+
+                                    <Label Grid.Row="3"
+                               Grid.Column="3"
+                               Text="{Binding _base.SpAttack}"
+                               Style="{StaticResource StatValueLabel}"/>
+
+                                    <Label Grid.Row="4"
+                               Grid.Column="1"
+                               Text="Sp. Defense"
+                               Style="{StaticResource StatLabel}"/>
+
+                                    <BoxView Grid.Row="4"
+                                 Grid.Column="2"
+                                 Color="#FF6811"
+                                 WidthRequest="{Binding SpDefense}"
+                                 Style="{StaticResource StatValueBox}"/>
+
+                                    <Label Grid.Row="4"
+                               Grid.Column="3"
+                               Text="{Binding _base.SpDefense}"
+                               Style="{StaticResource StatValueLabel}"/>
+
+                                    <Label Grid.Row="5"
+                               Grid.Column="1"
+                               Text="Speed"
+                               Style="{StaticResource StatLabel}"/>
+
+                                    <BoxView Grid.Row="5"
+                                 Grid.Column="2"
+                                 Color="#D693B4"
+                                 WidthRequest="{Binding Speed}"
+                                 Style="{StaticResource StatValueBox}"/>
+
+                                    <Label Grid.Row="5"
+                               Grid.Column="3"
+                               Text="{Binding _base.Speed}"
+                               Style="{StaticResource StatValueLabel}"/>
+
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,8 @@
+﻿<Application
+    x:Class="Pokedex_XamUIJuly.UWP.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Pokedex_XamUIJuly.UWP"
+    RequestedTheme="Light">
+
+</Application>

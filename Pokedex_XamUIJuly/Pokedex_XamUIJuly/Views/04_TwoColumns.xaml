@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Pokedex_XamUIJuly.Views._04_TwoColumns"
+             Title="Two columns layout example">
+    <ContentPage.Content>
+        <StackLayout Margin="20">
+            <ActivityIndicator Color="Blue"
+                IsVisible="{Binding IsLoading}"
+                IsRunning="{Binding IsLoading}"
+                IsEnabled="{Binding IsLoading}"/>
+
+            <CollectionView ItemsSource="{Binding PokemonList}" x:Name="collectionView">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="2"/>
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="60"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.RowSpan="2"
+                                   Source="{Binding ImageURL}"
+                                   WidthRequest="60"
+                                   HeightRequest="60"
+                                   Aspect="AspectFill"/>
+
+                            <Label Grid.Column="1"
+                                   Text="{Binding name.english}"
+                                   FontAttributes="Bold"
+                                   TextColor="Blue"/>
+
+                            <Label Grid.Row="1"
+                                   Grid.Column="1"
+                                   Text="{Binding Types}"
+                                   TextColor="Orange"
+                                   FontAttributes="Italic"
+                                   VerticalOptions="End"/>
+
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
